@@ -1,5 +1,5 @@
 #
-# Copyright 2018 The Android Open Source Project
+# Copyright 2020 Nimx rpiroid project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,19 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_rpi4.mk \
+# inherit base required android components
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 
-COMMON_LUNCH_CHOICES := \
-    aosp_rpi4-userdebug \
+# include vendor image components
+$(call inherit-product, device/rpidroid/rpi4/device.mk)
+
+# disable super image
+PRODUCT_BUILD_SUPER_PARTITION := false
+
+# product information
+PRODUCT_MANUFACTURER := Raspberry PI4
+PRODUCT_BRAND := Android
+PRODUCT_NAME := aosp_rpi4
+PRODUCT_DEVICE := rpi4
+PRODUCT_MODEL := AOSP on rpi4
