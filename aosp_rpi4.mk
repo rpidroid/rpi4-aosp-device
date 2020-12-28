@@ -20,6 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 
 # include vendor image components
 $(call inherit-product, device/rpidroid/rpi4/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # disable super image
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -30,3 +31,5 @@ PRODUCT_BRAND := Android
 PRODUCT_NAME := aosp_rpi4
 PRODUCT_DEVICE := rpi4
 PRODUCT_MODEL := AOSP on rpi4
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_CHARACTERISTICS := tablet
