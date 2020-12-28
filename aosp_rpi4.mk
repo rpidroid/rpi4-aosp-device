@@ -15,6 +15,7 @@
 #
 
 # inherit base required android components
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 
@@ -33,3 +34,6 @@ PRODUCT_DEVICE := rpi4
 PRODUCT_MODEL := AOSP on rpi4
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_SOONG_NAMESPACES += external/mesa3d
+
+

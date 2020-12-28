@@ -27,38 +27,37 @@ PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 PRODUCT_PACKAGES := vndk-sp
 
 # inherit makefile
-include build/make/target/product/iorap_large_memory_config.mk
+# include build/make/target/product/iorap_large_memory_config.mk
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
-
-# Soong namespace
-PRODUCT_SOONG_NAMESPACE += external/mesa3d
 
 # Android Framework Overlays
 DEVICE_PACKAGE_OVERLAYS += device/rpiroid/rpi4/overlay
 
 # Audio
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.audio@2.0-impl \
 	android.hardware.audio.effect@2.0-impl \
 	android.hardware.audio@2.0-service \
-	android.hardware.bluetooth.audio@2.0-impl \
-	audio.primary.rpi4 \
+	audio.primary.pi4 \
     	audio.usb.default \
     	audio.a2dp.default \
     	audio.r_submix.default \
 	tinyplay \
 	tinycap \
 	tinymix \
-	tinypcminfo
+	tinypcminfo \
+
+# android.hardware.bluetooth.audio@2.0-impl
+# frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml
+
 
 PRODUCT_COPY_FILES := \
 	frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
-	frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \	
 	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-	frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration.xml \	
+	frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
@@ -75,7 +74,7 @@ PRODUCT_COPY_FILES += \
   	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
 
 # Camera
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.camera.provider@2.5-external-service \
 
 PRODUCT_COPY_FILES := \
@@ -83,7 +82,7 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml \
 
 # Bluetooth
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.bluetooth@1.0-service \
      	android.hardware.bluetooth@1.0-impl \
 
@@ -93,7 +92,7 @@ PRODUCT_COPY_FILES := \
         frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
 
 # Wifi
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.wifi@1.0-service \
 	hostapd \
 	libwpa_client \
@@ -119,7 +118,7 @@ PRODUCT_PACKAGES += \
     	android.hardware.graphics.composer@2.2-impl \
     	android.hardware.graphics.composer@2.2-service \
     	android.hardware.graphics.mapper@2.0-impl-2.1 \
-    	gralloc.rpi4 \
+    	gralloc.pi4 \
     	libGLES_mesa
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -130,23 +129,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
     	ro.rfkilldisabled=1
 
 # memtrack
-PRODUCT_PACKAGE += \
-	memtrack.rpi4 \
+PRODUCT_PACKAGES += \
+	memtrack.pi4 \
 	android.hardware.memtrack@1.0-impl \
     	android.hardware.memtrack@1.0-service \
 
 # health
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.health@2.1-service \
     	android.hardware.health@2.1-impl \
     	android.hardware.health.storage@1.0-service \
 
 # gatekeeper
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.gatekeeper@1.0-service.software
 
 # keymaster
-PRODUCT_PACKAGE += \
+PRODUCT_PACKAGES += \
 	android.hardware.keymaster@3.0-impl \
     	android.hardware.keymaster@3.0-service \
 
