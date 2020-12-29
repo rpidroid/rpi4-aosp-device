@@ -14,17 +14,11 @@
 # limitations under the License.
 #
 
-# inherit base required android components
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
+# enable apex update
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # include vendor image components
 $(call inherit-product, device/rpidroid/rpi4/device.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-# disable super image
-PRODUCT_BUILD_SUPER_PARTITION := false
 
 # product information
 PRODUCT_MANUFACTURER := Raspberry PI4
@@ -36,4 +30,5 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_SOONG_NAMESPACES += external/mesa3d
 
-
+# inherit base required android components
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)

@@ -27,8 +27,7 @@ PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 PRODUCT_PACKAGES := vndk-sp
 
 # inherit makefile
-# include build/make/target/product/iorap_large_memory_config.mk
-include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 # Android Framework Overlays
 DEVICE_PACKAGE_OVERLAYS += device/rpiroid/rpi4/overlay
@@ -38,18 +37,17 @@ PRODUCT_PACKAGES += \
 	android.hardware.audio@2.0-impl \
 	android.hardware.audio.effect@2.0-impl \
 	android.hardware.audio@2.0-service \
+	android.hardware.soundtrigger@2.0-impl \
+	android.hardware.bluetooth.audio@2.0-impl \
 	audio.primary.pi4 \
     	audio.usb.default \
     	audio.a2dp.default \
     	audio.r_submix.default \
+	audio.bluetooth.default \
 	tinyplay \
 	tinycap \
 	tinymix \
 	tinypcminfo \
-
-# android.hardware.bluetooth.audio@2.0-impl
-# frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml
-
 
 PRODUCT_COPY_FILES := \
 	frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
@@ -62,6 +60,7 @@ PRODUCT_COPY_FILES := \
 	frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
 	frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+	frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \
 	$(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
 	frameworks/base/data/sounds/effects/ogg/Effect_Tick_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/Effect_Tick.ogg \
 	frameworks/base/data/sounds/effects/ogg/camera_click_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/camera_click.ogg \
@@ -83,6 +82,7 @@ PRODUCT_COPY_FILES := \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
+	android.hardware.bluetooth@1.1-service.btlinux \
 	android.hardware.bluetooth@1.0-service \
      	android.hardware.bluetooth@1.0-impl \
 
@@ -193,4 +193,11 @@ PRODUCT_COPY_FILES := \
     	$(LOCAL_PATH)/firmware/brcmfmac43455-sdio.txt:root/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,4-model-b.txt \
     	$(LOCAL_PATH)/firmware/brcmfmac43455-sdio.txt:$(TARGET_COPY_OUT_RAMDISK)/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,4-model-b.txt \
     	$(LOCAL_PATH)/firmware/BCM4345C0.hcd:root/lib/firmware/brcm/BCM4345C0.hcd \
+
+
+# ssh packages
+PRODUCT_PACKAGES += ssh sftp scp sshd ssh-keygen sshd_config start-ssh
+
+# vndk package
+PRODUCT_PACKAGES += vndk_package
 
