@@ -1,0 +1,11 @@
+cc_library_shared {
+    name: "audio.primary.pi4",
+    relative_install_path: "hw",
+    proprietary: true,
+    srcs: ["audio_hw.c"],
+    header_libs: ["libhardware_headers"],
+    shared_libs: [
+        "liblog",
+    ],
+    cflags: ["-Wall", "-Werror", "-Wno-unused-parameter"],
+}
